@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using PharmacyApi.Abstracts;
 
 namespace PharmacyApi.Models
 {
-    public class Patient
+    public class Patient:AEntity
     {
         public string Name {get;set;}
         public int Age {get;set;}
