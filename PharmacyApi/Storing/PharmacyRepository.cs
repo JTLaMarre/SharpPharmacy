@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PharmacyApi.Models;
@@ -32,11 +33,22 @@ namespace PharmacyApi.Storing
         {
             return _ctx.Patients.Include(p => p.Drugs).FirstOrDefault(p => p.Name == name);
         }
+        public List<Patient> GetPatients()
+        {
+            return _ctx.Patients.ToList();
+        }
         public Drug GetDrug(string name)
         {
             return _ctx.Drugs.FirstOrDefault(p => p.Name == name);
         }
-        
+        public List<Drug> GetDrugs()
+        {
+            return _ctx.Drugs.ToList();
+        }
+        public IEnumerable<Drug> patientDrugs(long id)
+        {
+            return _ctx.Drugs.Where(d => d.PatientEntityId==id).ToList();
+        }
         // Deletes --------------------------------------------------------
         public void RemoveDrug(long id)
         {

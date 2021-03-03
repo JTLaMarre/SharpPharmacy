@@ -21,7 +21,7 @@ public class DrugController:ControllerBase
     [HttpGet("/Drugs")]
     public IActionResult GetDrugs()
     {
-        var drugs = _ctx.Drugs.ToList();
+        var drugs = _repo.GetDrugs();
         return Ok(drugs);
         
     }
@@ -31,7 +31,7 @@ public class DrugController:ControllerBase
 
       
 
-        var drugs = _ctx.Drugs.Where(d => d.PatientEntityId == PatientEntityId).ToList();
+        var drugs = _repo.patientDrugs(PatientEntityId);
         return Ok(drugs);
     }
 
