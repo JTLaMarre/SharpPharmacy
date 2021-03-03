@@ -37,9 +37,9 @@ namespace PharmacyApi.Storing
         {
             return _ctx.Patients.ToList();
         }
-        public Drug GetDrug(string name)
+        public Drug GetDrug(long id)
         {
-            return _ctx.Drugs.FirstOrDefault(p => p.Name == name);
+            return _ctx.Drugs.FirstOrDefault(p => p.EntityId == id);
         }
         public List<Drug> GetDrugs()
         {
@@ -49,6 +49,15 @@ namespace PharmacyApi.Storing
         {
             return _ctx.Drugs.Where(d => d.PatientEntityId==id).ToList();
         }
+
+
+        // update  --------------------------------------------
+       
+       public void Update()
+       {
+           _ctx.SaveChanges();
+       }
+
         // Deletes --------------------------------------------------------
         public void RemoveDrug(long id)
         {

@@ -10,8 +10,7 @@ namespace PharmacyApi.Controllers
 [ApiController]
 public class DrugController:ControllerBase
 {
-    private readonly PharmacyContext _ctx;
-
+   
     private readonly PharmacyRepository _repo;
         public DrugController(PharmacyRepository repo)
     {
@@ -25,6 +24,13 @@ public class DrugController:ControllerBase
         return Ok(drugs);
         
     }
+    [HttpGet("/Drugs/Drug/{id}")]
+    public IActionResult GetDrug(long id)
+    {
+        var drugs = _repo.GetDrug(id);
+        return Ok(drugs);
+        
+    }
     [HttpGet("/Drugs/{PatientEntityId}")]
     public IActionResult PatientDrugs(long PatientEntityId)
     {
@@ -35,7 +41,7 @@ public class DrugController:ControllerBase
         return Ok(drugs);
     }
 
-    // Todo Add Drug Post method
+    
     [HttpPost("/Drugs/Add")]
     public IActionResult AddDrug([FromBody]Drug json)
     {
@@ -45,6 +51,14 @@ public class DrugController:ControllerBase
               
         _repo.AddDrug(drug);
         
+        return Ok();
+    }
+
+    [HttpPut("/Drugs/{id}/{dec}")]
+    public IActionResult EditDrug(long id, int dec)
+    {   Drug drug = _repo.GetDrug(id);
+        drug.Amount= drug.Amount - dec;
+        _repo.Update();
         return Ok();
     }
    
