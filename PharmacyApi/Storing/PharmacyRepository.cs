@@ -33,6 +33,14 @@ namespace PharmacyApi.Storing
         {
             return _ctx.Patients.Include(p => p.Drugs).FirstOrDefault(p => p.Name == name);
         }
+        public List<Patient> GetPatientFirst(string name)
+        {
+            return _ctx.Patients.Where(p => p.Name == name).ToList();
+        }
+        public List<Patient> GetPatientLast(string name)
+        {
+            return _ctx.Patients.Where(p => p.LastName == name).ToList() ;
+        }
         public List<Patient> GetPatients()
         {
             return _ctx.Patients.ToList();

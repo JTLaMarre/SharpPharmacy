@@ -35,6 +35,18 @@ public class PatientController:ControllerBase
         
         return Ok();
     }
+    [HttpGet("/patients/firstname/{name}")]
+    public IActionResult getFirstnamePatient(string name)
+    {
+        var patients = _repo.GetPatientFirst(name);
+        return Ok(patients);
+    }
+    [HttpGet("/patients/lastname/{name}")]
+    public IActionResult getLastnamePatient(string name)
+    {
+        var patients = _repo.GetPatientLast(name);
+        return Ok(patients);
+    }
 }
 
 }
