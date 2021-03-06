@@ -1,5 +1,5 @@
-<form action="">
+<form (ngSubmit)="onSubmit()">
   <label>Search by fisrtname</label>
-  <input type="text">
-  <button type="submit" placeholder="first name">Search</button>
+  <input type="text"name="firstName" [(ngModel)]="firstName" placeholder="first name">
+  <button type="submit" value="Submit" >Search</button>
 </form>

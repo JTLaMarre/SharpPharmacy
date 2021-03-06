@@ -23,6 +23,7 @@ namespace PharmacyApi
         }
 
         public IConfiguration Configuration { get; }
+        
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -35,9 +36,18 @@ namespace PharmacyApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PharmacyApi", Version = "v1" });
             });
             services.AddDbContext<PharmacyContext>();
+                services.AddCors(options =>
+       {
+           options.AddPolicy(name: MyAllowSpecificOrigins,
+                             builder =>
+                             {
+                                 builder.WithOrigins("http://localhost:5000").AllowAnyHeader().AllowAnyMethod();
+                             });
+       });
             services.AddScoped<PharmacyRepository>();
             
         }
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

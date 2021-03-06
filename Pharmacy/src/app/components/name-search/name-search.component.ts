@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PharmacyService } from '../../services/pharmacy.service.service';
 
 @Component({
   selector: 'app-name-search',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NameSearchComponent implements OnInit {
 
-  constructor() { }
+  firstName:string;
+
+  constructor(private service:PharmacyService) { }
 
   ngOnInit(): void {
+  }
+
+
+  onSubmit(){
+
+
+
+    this.service.GetPatient(this.firstName).subscribe(data =>{
+      console.log(data);
+    })
   }
 
 }

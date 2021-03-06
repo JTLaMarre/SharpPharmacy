@@ -1,4 +1,3 @@
-
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PharmacyApi.Models;
@@ -35,7 +34,7 @@ public class PatientController:ControllerBase
         
         return Ok();
     }
-    [HttpGet("/patients/firstname/{name}")]
+    [HttpGet("/patients/firstname/{name}")]    
     public IActionResult getFirstnamePatient(string name)
     {
         var patients = _repo.GetPatientFirst(name);
